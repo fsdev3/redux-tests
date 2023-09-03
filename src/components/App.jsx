@@ -1,16 +1,22 @@
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 export const App = () => {
+  const dispatch = useDispatch();
+  const cash = useSelector(state => state.cash);
+  console.log(cash);
+  const addCash = cash => {
+    dispatch({ type: 'addCash', payload: cash });
+  };
+
+  const getCash = cash => {
+    dispatch({ type: 'getCash', payload: cash });
+  };
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
+    <>
+      <button onClick={() => addCash(Number(prompt()))}>Add cash</button>
+      <button onClick={() => getCash(Number(prompt()))}>Get cash</button>
+      <p>Cash: {cash}</p>
+    </>
   );
 };
